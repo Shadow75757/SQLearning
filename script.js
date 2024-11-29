@@ -1,4 +1,3 @@
-// Handle button hover styles efficiently
 const buttonsWithInfo = document.querySelectorAll('button[data-info]');
 buttonsWithInfo.forEach(button => {
     button.addEventListener('mouseover', () => {
@@ -11,30 +10,56 @@ buttonsWithInfo.forEach(button => {
 document.addEventListener('DOMContentLoaded', () => {
     const itemNameInput = document.getElementById("item-name");
     const quantityInput = document.getElementById("quantity");
-    const sqlTooltip = document.querySelector(".tooltip-additem");
+    const addTooltip = document.querySelector(".tooltip-additem");
 
-    if (!sqlTooltip) {
-        console.error("Tooltip element not found!");
-        return;
-    }
-
-    function updateSQLTooltip() {
+    function updateAddTooltip() {
         const itemName = itemNameInput.value.trim() || "&lt;itemName&gt;";
         const quantity = quantityInput.value.trim() || "&lt;quantity&gt;";
-        sqlTooltip.innerHTML = `
+        addTooltip.innerHTML = `
             <span class="sql-keyword">INSERT</span>
-            <span class="sql-keyword">INTO</span> inventory (<span class="${itemNameInput.value.trim() ? 'user-value' : 'default-value'}">${itemName}</span>,
+            <span class="sql-keyword">INTO</span> inventory (<span class="${itemNameInput.value.trim() ? 'user-value' : 'default-value'}">${itemName}</span>, 
             <span class="${quantityInput.value.trim() ? 'user-value' : 'default-value'}">${quantity}</span>)
         `;
     }
 
     [itemNameInput, quantityInput].forEach(input =>
-        input.addEventListener("input", updateSQLTooltip)
+        input.addEventListener("input", updateAddTooltip)
     );
+
+    updateAddTooltip();
+
+    const editItemNameInput = document.getElementById("edit-item-name");
+    const editQuantityInput = document.getElementById("edit-quantity");
+    const updateButton = document.getElementById("update-button");
+    const updateTooltip = updateButton.querySelector(".tooltip");
+
+    function updateEditTooltip() {
+        const itemName = editItemNameInput.value.trim() || "&lt;itemName&gt;";
+        const quantity = editQuantityInput.value.trim() || "&lt;quantity&gt;";
+        updateTooltip.innerHTML = `
+            <span class="sql-keyword">UPDATE</span> inventory
+            <span class="sql-keyword">SET</span>
+            item_name=<span class="${editItemNameInput.value.trim() ? 'user-value' : 'default-value'}">${itemName}</span>, 
+            quantity=<span class="${editQuantityInput.value.trim() ? 'user-value' : 'default-value'}">${quantity}</span>
+            <span class="sql-keyword">WHERE</span> id=<span class="user-value">${document.getElementById("edit-id").value}</span>
+        `;
+    }
+
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            setTimeout(updateEditTooltip, 0);
+        });
+    });
+
+    [editItemNameInput, editQuantityInput].forEach(input =>
+        input.addEventListener("input", updateEditTooltip)
+    );
+
+    updateButton.addEventListener('mouseover', updateEditTooltip);
+
+    updateEditTooltip();
 });
 
-
-// Delete Button Functionality
 document.querySelectorAll('.delete-btn').forEach(button => {
     button.addEventListener('click', async () => {
         const itemId = button.getAttribute('data-id');
@@ -56,7 +81,6 @@ document.querySelectorAll('.delete-btn').forEach(button => {
     });
 });
 
-// Add Button Functionality
 document.getElementById('add-button').addEventListener('click', async () => {
     const itemName = itemNameInput.value.trim();
     const quantity = quantityInput.value.trim();
@@ -80,7 +104,6 @@ document.getElementById('add-button').addEventListener('click', async () => {
     }
 });
 
-// Edit Modal Functionality
 const editModal = document.getElementById('edit-modal');
 const closeBtn = document.querySelector('.close-btn');
 const editForm = document.getElementById('edit-form');
@@ -121,7 +144,6 @@ editForm.addEventListener('submit', async event => {
     editModal.style.display = 'none';
 });
 
-// Tooltip Positioning & Resizing
 buttonsWithInfo.forEach(button => {
     const tooltip = button.querySelector('.tooltip');
     button.addEventListener('mouseover', () => {
@@ -133,11 +155,10 @@ buttonsWithInfo.forEach(button => {
             modalRect.left,
             Math.min(buttonRect.left, modalRect.right - tooltipRect.width)
         );
-        tooltip.style.left = `${tooltipOffset - modalRect.left}px`; // Fixed template literal syntax
+        tooltip.style.left = `${tooltipOffset - modalRect.left}px`;
     });
 });
 
-// Hover Effect for Update Button
 const updateButton = document.getElementById('update-button');
 const modalContent = document.querySelector('.modal-content');
 updateButton.addEventListener('mouseover', () => modalContent.classList.add('expanded-section'));

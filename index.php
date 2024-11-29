@@ -65,7 +65,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
 
                                             <button type="submit" id="update-button">
                                                 Update Item
-                                                <div class="tooltip">
+                                                <div style="top: 45px" class="tooltip">
                                                     <span class="sql-keyword">UPDATE</span> inventory
                                                     <span class="sql-keyword">SET</span>
                                                     item_name=<span class="user-value">'Item Name'</span>,
@@ -104,7 +104,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                     <input type="number" id="quantity" placeholder="Enter quantity">
 
                     <div id="add-button-container">
-                        <button id="add-button" type="button">
+                        <button style="width: 100%" id="add-button" type="button">
                             Add Item
                         </button>
                         <!-- Tooltip for the add button -->
