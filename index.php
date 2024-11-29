@@ -9,7 +9,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MYSQLearning</title>
+    <title>MYSQLearning | Home</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -26,6 +26,8 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                         <th>ID</th>
                         <th>Item Name</th>
                         <th>Quantity</th>
+                        <th>Updated by</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -35,6 +37,8 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= $item['id'] ?></td>
                             <td><?= $item['item_name'] ?></td>
                             <td><?= $item['quantity'] ?></td>
+                            <td><?= $item['inserted_by'] ?></td>
+                            <td><?= $item['added_at'] ?></td>
                             <td>
                                 <button class="edit-btn">Edit</button>
                                 <div id="edit-modal" class="modal">

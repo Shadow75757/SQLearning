@@ -24,9 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>SQLearning | Login Form</title>
+    <link rel="stylesheet" href="login_style.css">
 </head>
+<?php require_once ('requirments/header.php');?>
 <body>
     <div class="login-form">
         <h2>Login</h2>
@@ -37,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
+            <a class="register" href="register.php">Don't have an account?<br><a class="register" style="color:#0037C6; padding: 0px" href="register.php">Register now!</a></a>
         </form>
     </div>
 </body>
