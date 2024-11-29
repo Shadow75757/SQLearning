@@ -11,25 +11,11 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MYSQLearning</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <header>
-        <h1><strong>MySQL</strong>earing Hub</h1>
-        <nav>
-            <?php if (isset($_SESSION['user'])): ?>
-                <div class="profile-menu">
-                    <img src="uploads/<?= $_SESSION['user']['profile_image'] ?>" alt="Profile" class="profile-image">
-                    <div class="dropdown">
-                        <a href="profile.php">Profile</a>
-                        <a href="logout.php">Logout</a>
-                    </div>
-                </div>
-            <?php else: ?>
-                <a href="login.php" class="login-btn">Login</a>
-            <?php endif; ?>
-        </nav>
-    </header>
+    <?php require_once 'requirments/header.php';?>
 
     <main>
         <div class="inventory">
@@ -107,7 +93,6 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                         <button style="width: 100%" id="add-button" type="button">
                             Add Item
                         </button>
-                        <!-- Tooltip for the add button -->
                         <div class="tooltip-additem">
                             <span class="sql-keyword">INSERT</span>
                             <span class="sql-keyword">INTO</span> inventory (<span class="default-value">&lt;itemName&gt;</span>,

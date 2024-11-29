@@ -12,6 +12,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const quantityInput = document.getElementById("quantity");
     const addTooltip = document.querySelector(".tooltip-additem");
 
+    document.getElementById('add-button').addEventListener('click', async () => {
+        const itemName = itemNameInput.value.trim();
+        const quantity = quantityInput.value.trim();
+
+        if (itemName && quantity) {
+            try {
+                const response = await fetch('insert.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ item_name: itemName, quantity }),
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    await Swal.fire({
+                        title: 'Success!',
+                        text: result.message || 'Item added successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                    location.reload();
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: result.message || 'Failed to add the item.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                }
+            } catch (error) {
+                console.error('Add request failed:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'An unexpected error occurred. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            }
+        } else {
+            Swal.fire({
+                title: 'Missing Fields',
+                text: 'Please fill out both fields before adding an item.',
+                icon: 'warning',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true
+            });
+        }
+    });
+
     function updateAddTooltip() {
         const itemName = itemNameInput.value.trim() || "&lt;itemName&gt;";
         const quantity = quantityInput.value.trim() || "&lt;quantity&gt;";
@@ -63,45 +120,57 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.delete-btn').forEach(button => {
     button.addEventListener('click', async () => {
         const itemId = button.getAttribute('data-id');
-        if (confirm('Are you sure you want to delete this item?')) {
+
+        // SweetAlert2 Confirmation Dialog
+        const confirmation = await Swal.fire({
+            title: 'Are you sure you want to delete?',
+            text: 'This action cannot be undone.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (confirmation.isConfirmed) {
             try {
                 const response = await fetch('delete.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: itemId }),
                 });
+
                 const result = await response.json();
-                alert(result.message);
-                if (result.status === 'success') location.reload();
+
+                if (result.status === 'success') {
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: result.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: result.message || 'Failed to delete the item.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
             } catch (error) {
                 console.error('Delete request failed:', error);
-                alert('Failed to delete the item. Please try again.');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to delete the item. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             }
         }
     });
-});
-
-document.getElementById('add-button').addEventListener('click', async () => {
-    const itemName = itemNameInput.value.trim();
-    const quantity = quantityInput.value.trim();
-
-    if (itemName && quantity) {
-        try {
-            const response = await fetch('insert.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ item_name: itemName, quantity }),
-            });
-            const result = await response.json();
-            alert(result.message);
-            if (result.status === 'success') location.reload();
-        } catch (error) {
-            console.error('Add request failed:', error);
-            alert('Failed to add the item. Please try again.');
-        }
-    } else {
-        alert('Please fill out both fields.');
-    }
 });
 
 const editModal = document.getElementById('edit-modal');
@@ -132,6 +201,7 @@ editForm.addEventListener('submit', async event => {
             method: 'POST',
             body: new FormData(editForm),
         });
+        
         if (response.ok) {
             alert('Item updated successfully!');
             location.reload();
