@@ -73,11 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemName = itemNameInput.value.trim() || "&lt;itemName&gt;";
         const quantity = quantityInput.value.trim() || "&lt;quantity&gt;";
         addTooltip.innerHTML = `
-            <span class="sql-keyword">INSERT</span>
-            <span class="sql-keyword">INTO</span> inventory (<span class="${itemNameInput.value.trim() ? 'user-value' : 'default-value'}">${itemName}</span>, 
-            <span class="${quantityInput.value.trim() ? 'user-value' : 'default-value'}">${quantity}</span>)
+            <i class="fa-solid fa-server" style="margin-right: 8px;vertical-align: middle"></i> |
+            <span class="sql-keyword" style="margin-left: 8px;vertical-align: middle">INSERT</span>
+            <span class="sql-keyword" style="vertical-align: middle">INTO</span> inventory (
+                <span style="vertical-align: middle" class="${itemNameInput.value.trim() ? 'user-value' : 'default-value'}">${itemName}</span>, 
+                <span style="vertical-align: middle" class="${quantityInput.value.trim() ? 'user-value' : 'default-value'}">${quantity}</span>
+            )
         `;
     }
+
 
     [itemNameInput, quantityInput].forEach(input =>
         input.addEventListener("input", updateAddTooltip)
@@ -94,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemName = editItemNameInput.value.trim() || "&lt;itemName&gt;";
         const quantity = editQuantityInput.value.trim() || "&lt;quantity&gt;";
         updateTooltip.innerHTML = `
+            <i class="fa-solid fa-pen-to-square style="margin-right: 8px;vertical-align: middle""></i> |
             <span class="sql-keyword">UPDATE</span> inventory
             <span class="sql-keyword">SET</span>
             item_name=<span class="${editItemNameInput.value.trim() ? 'user-value' : 'default-value'}">${itemName}</span>, 
@@ -201,7 +206,7 @@ editForm.addEventListener('submit', async event => {
             method: 'POST',
             body: new FormData(editForm),
         });
-        
+
         if (response.ok) {
             alert('Item updated successfully!');
             location.reload();

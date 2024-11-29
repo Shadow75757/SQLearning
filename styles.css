@@ -11,11 +11,6 @@ body {
     line-height: 1.6;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-}
-
 .profile-menu {
     position: relative;
     display: flex;
@@ -192,7 +187,7 @@ form button:hover {
     white-space: nowrap;
     z-index: 1000;
     top: 0px;
-    left: 200px;
+    left: -150px;
     transform: translateX(-50%);
     opacity: 0;
     visibility: hidden;
@@ -207,9 +202,9 @@ button:hover .tooltip {
 .tooltip-additem {
     display: none;
     position: absolute;
-    background-color: #333;
+    background-color: #222;
     color: white;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 4px;
     white-space: nowrap;
     z-index: 1000;
@@ -313,12 +308,13 @@ button:hover .tooltip-additem {
 .close-btn {
     position: absolute;
     right: 20px;
-    font-size: 2em;
+    font-size: 2.5em;
     cursor: pointer;
     background: none;
     border: none;
     color: #fff;
     transition: all 0.3s ease;
+    top: 11px;
 }
 
 .close-btn:hover {

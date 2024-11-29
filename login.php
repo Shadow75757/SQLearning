@@ -21,13 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQLearning | Login Form</title>
     <link rel="stylesheet" href="login_style.css">
 </head>
-<?php require_once ('requirments/header.php');?>
+<?php require_once('includes/header/header.php'); ?>
+
 <body>
     <div class="login-form">
         <h2>Login</h2>
@@ -42,4 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </body>
+<?php require_once('includes/header/header.php'); ?>
+
 </html>

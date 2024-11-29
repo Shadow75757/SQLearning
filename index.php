@@ -12,10 +12,11 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
     <title>MYSQLearning | Home</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/076868c758.js" crossorigin="anonymous"></script>
 </head>
+<?php require_once 'includes/header/header.php'; ?>
 
 <body>
-    <?php require_once 'requirments/header.php';?>
 
     <main>
         <div class="inventory">
@@ -45,6 +46,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="modal-content">
                                         <span class="close-btn">&times;</span>
                                         <h2>Edit Item</h2>
+                                        <br>
                                         <form id="edit-form">
                                             <input type="hidden" id="edit-id" name="id">
                                             <label for="edit-item-name">Item Name:</label>
@@ -55,7 +57,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
 
                                             <button type="submit" id="update-button">
                                                 Update Item
-                                                <div style="top: 45px" class="tooltip">
+                                                <div style="top: 45px; left: 50%" class="tooltip">
                                                     <span class="sql-keyword">UPDATE</span> inventory
                                                     <span class="sql-keyword">SET</span>
                                                     item_name=<span class="user-value">'Item Name'</span>,
@@ -71,9 +73,10 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                                 <button class="delete-btn" data-id="<?= $item['id'] ?>">
                                     Delete
                                     <div class="tooltip">
-                                        <span class="sql-keyword">DELETE</span>
-                                        <span class="sql-keyword">FROM</span> inventory
-                                        <span class="sql-keyword">WHERE</span> id=<span class="user-value"><?= $item['id'] ?></span>
+                                        <i class="fa-solid fa-trash" style="vertical-align: middle"></i> |
+                                        <span style="vertical-align: middle" class="sql-keyword">DELETE</span>
+                                        <span style="vertical-align: middle" class="sql-keyword">FROM</span> <a style="vertical-align: middle">inventory</a>
+                                        <span style="vertical-align: middle" class="sql-keyword">WHERE</span> <a style="vertical-align: middle">id=</a><span style="vertical-align: middle" class="user-value"><?= $item['id'] ?></span>
                                     </div>
                                 </button>
                             </td>
@@ -109,6 +112,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <script src="script.js"></script>
     </main>
+    <?php require_once 'includes/header/header.php'; ?>
 </body>
 
 </html>
