@@ -2,21 +2,27 @@
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->execute(['username' => $username]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user'] = $user;
-        header("Location: index.php");
-        exit();
+    if (!empty($username) && !empty($password)) {
+        $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $stmt->bind_result($user_id, $hashed_password);
+        if ($stmt->fetch() && password_verify($password, $hashed_password)) {
+            $_SESSION['user_id'] = $user_id;
+            header("Location: index.php");
+            exit;
+        } else {
+            $error = "Invalid username or password.";
+        }
+        $stmt->close();
     } else {
-        $error = "Invalid username or password.";
+        $error = "Please enter your username and password.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>

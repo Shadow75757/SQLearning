@@ -9,7 +9,7 @@ header {
     align-items: center;
     background-color: #1a1a1a;
     padding: 10px 20px;
-    color: #61dafb;
+    color: #1f6d85;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -20,11 +20,17 @@ header h1 {
 
 .headerH1 {
     text-decoration: none;
-    color: #61dafb;
+    color: #1f6d85;
+    transition: all 0.3s ease;
+}
+
+.headerH1:hover {
+    color: #114e61;
+    transform: scale(1.05);
 }
 
 .login-btn {
-    background-color: #007bff;
+    background-color: #1f6d85;
     color: white;
     padding: 5px 15px;
     border-radius: 5px;
@@ -34,6 +40,6 @@ header h1 {
 }
 
 .login-btn:hover {
-    background-color: #0056b3;
+    background-color: #114e61;
     transform: scale(1.05);
 }

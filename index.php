@@ -112,7 +112,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <script src="script.js"></script>
     </main>
-    <?php require_once 'includes/header/header.php'; ?>
+    <?php require_once 'includes/footer/footer.php'; ?>
 </body>
 
 </html>
