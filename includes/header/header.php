@@ -11,7 +11,7 @@
                 </div>
             </div>
         <?php else: ?>
-            <a href="login.php" class="login-btn">Login</a>
+            <a href="includes/authentication/login/login.php" class="login-btn">Login</a>
         <?php endif; ?>
     </nav>
 </header>
