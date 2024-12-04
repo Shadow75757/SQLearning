@@ -1,7 +1,31 @@
 <?php
 require 'db.php';
+
+$userLoggedIn = isset($_SESSION['user_id']) ? true : false;
+
+if ($userLoggedIn) {
+    $stmt = $pdo->prepare("SELECT profile_image FROM users WHERE id = :user_id");
+    $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $profileImage = $user['profile_image'];
+} else {
+    $profileImage = null;
+}
+
 $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+
+<script>
+    <?php if (isset($_SESSION['user'])): ?>
+        const username = "<?php echo $_SESSION['user']['username']; ?>";
+        console.log("Logged in as: " + username);
+    <?php else: ?>
+        console.log("Not logged in");
+    <?php endif; ?>
+</script>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +93,6 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                                         </form>
                                     </div>
                                 </div>
-
                                 <button class="delete-btn" data-id="<?= $item['id'] ?>">
                                     Delete
                                     <div class="tooltip">
@@ -110,7 +133,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
                 </form>
             </div>
         </div>
-        <script src="script.js"></script>
+        <script src="crud.js"></script>
     </main>
     <?php require_once 'includes/footer/footer.php'; ?>
 </body>

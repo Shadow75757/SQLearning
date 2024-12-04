@@ -11,7 +11,6 @@ body {
     line-height: 1.6;
 }
 
-
 form {
     display: flex;
     flex-direction: column;
@@ -64,7 +63,7 @@ form button:hover {
 
 .login-form h2 {
     margin-bottom: 20px;
-    color: #61dafb;
+    color: #1f6d85;
     text-align: center;
 }
 
@@ -111,4 +110,9 @@ a.register {
     text-align: center;
     padding-top: 25px;
     color: lightgray;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
 }

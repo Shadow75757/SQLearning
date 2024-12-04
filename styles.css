@@ -187,7 +187,7 @@ form button:hover {
     white-space: nowrap;
     z-index: 1000;
     top: 0px;
-    left: -150px;
+    left: -154px;
     transform: translateX(-50%);
     opacity: 0;
     visibility: hidden;

@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="includes/footer/footer_style.css">
+<link rel="stylesheet" href="/xampp/SQLearning/includes/footer/footer_style.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 <footer class="footer">
     <div class="footer__container">
         <div class="footer__logo">
             <div class="footer__logo">
-                <img src="images/SQLearning.gif" alt="Logo" class="footer__logo-image" />
+                <img src="/xampp/SQLearning/images/SQLearning.gif" alt="Logo" class="footer__logo-image" />
             </div>
         </div>
         <div class="footer__links">

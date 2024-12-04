@@ -1,17 +1,34 @@
 <header>
-    <link rel="stylesheet" href="includes/header/header_style.css">
-    <h1><strong><a class="headerH1" href="#">MySQL</a></strong><a class="headerH1" href="#">earing Hub</a></h1>
+    <link rel="stylesheet" href="/xampp/SQLearning/includes/header/header_style.css">
+    <h1>
+        <strong><a class="headerH1" href="/xampp/SQLearning">MySQLearning Hub</a></strong>
+    </h1>
     <nav>
+        <?php
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $current_page = basename($_SERVER['PHP_SELF']);
+        ?>
         <?php if (isset($_SESSION['user'])): ?>
+            <?php
+            $profile_image = isset($_SESSION['user']['profile_image']) ? $_SESSION['user']['profile_image'] : 'default.png';
+            $valid_images = ['/xampp/SQLearning/images/default.png', ''];
+            if (in_array($profile_image, $valid_images)) {
+                $profile_image = '/xampp/SQLearning/images/default.png';
+            }
+            ?>
             <div class="profile-menu">
-                <img src="uploads/<?= $_SESSION['user']['profile_image'] ?>" alt="Profile" class="profile-image">
+                <img src="/xampp/SQLearning/images/<?= $profile_image ?>" alt="Profile" class="profile-image">
                 <div class="dropdown">
                     <a href="profile.php">Profile</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
-        <?php else: ?>
-            <a href="includes/authentication/login/login.php" class="login-btn">Login</a>
+        <?php elseif ($current_page !== 'login.php' && $current_page !== 'register.php'): ?>
+            <a href="/xampp/SQLearning/includes/authentication/login/login.php" class="login-btn">Login</a>
         <?php endif; ?>
     </nav>
+    <script src="includes/header/profile_timeout.js"></script>
 </header>

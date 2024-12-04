@@ -126,7 +126,6 @@ document.querySelectorAll('.delete-btn').forEach(button => {
     button.addEventListener('click', async () => {
         const itemId = button.getAttribute('data-id');
 
-        // SweetAlert2 Confirmation Dialog
         const confirmation = await Swal.fire({
             title: 'Are you sure you want to delete?',
             text: 'This action cannot be undone.',
@@ -184,7 +183,6 @@ const editForm = document.getElementById('edit-form');
 const editId = document.getElementById('edit-id');
 const editItemName = document.getElementById('edit-item-name');
 const editQuantity = document.getElementById('edit-quantity');
-
 document.querySelectorAll('.edit-btn').forEach(button => {
     button.addEventListener('click', () => {
         const row = button.closest('tr');
@@ -195,29 +193,53 @@ document.querySelectorAll('.edit-btn').forEach(button => {
     });
 });
 
+
 closeBtn.addEventListener('click', () => {
     editModal.style.display = 'none';
 });
 
 editForm.addEventListener('submit', async event => {
     event.preventDefault();
+
     try {
         const response = await fetch('update.php', {
             method: 'POST',
             body: new FormData(editForm),
         });
 
-        if (response.ok) {
-            alert('Item updated successfully!');
-            location.reload();
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            Swal.fire({
+                title: 'Success!',
+                text: result.message || 'Item updated successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true
+            }).then(() => {
+                location.reload();
+            });
         } else {
-            alert('Failed to update item.');
+            Swal.fire({
+                title: 'Error!',
+                text: result.message || 'Failed to update the item.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
     } catch (error) {
         console.error('Update request failed:', error);
+        Swal.fire({
+            title: 'Error!',
+            text: 'Failed to update the item. Please try again.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
     editModal.style.display = 'none';
 });
+
 
 buttonsWithInfo.forEach(button => {
     const tooltip = button.querySelector('.tooltip');
