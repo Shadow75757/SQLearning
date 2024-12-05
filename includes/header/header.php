@@ -1,7 +1,7 @@
 <header>
     <link rel="stylesheet" href="/xampp/SQLearning/includes/header/header_style.css">
     <h1>
-        <strong><a class="headerH1" href="/xampp/SQLearning">MySQLearning Hub</a></strong>
+        <strong><a class="headerH1" href="/xampp/SQLearning">SQLearning Hub</a></strong>
     </h1>
     <nav>
         <?php
@@ -22,13 +22,13 @@
             <div class="profile-menu">
                 <img src="/xampp/SQLearning/images/<?= $profile_image ?>" alt="Profile" class="profile-image">
                 <div class="dropdown">
-                    <a href="profile.php">Profile</a>
-                    <a href="logout.php">Logout</a>
+                    <a href="profile/profile.php"><strong><i class="ri-user-line"></i></strong> | Profile</a>
+                    <a href="logout.php"><strong><i class="ri-logout-box-line"></i></strong> | Logout</a>
                 </div>
             </div>
         <?php elseif ($current_page !== 'login.php' && $current_page !== 'register.php'): ?>
             <a href="/xampp/SQLearning/includes/authentication/login/login.php" class="login-btn">Login</a>
         <?php endif; ?>
     </nav>
-    <script src="includes/header/profile_timeout.js"></script>
+    <script src="/xampp/SQLearning/includes/header/profile_timeout.js"></script>
 </header>

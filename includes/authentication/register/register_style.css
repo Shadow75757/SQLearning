@@ -124,6 +124,69 @@ a.register {
     color: lightgray;
 }
 
+.btn:hover .tooltip {
+    content: attr(title);
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 15px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #222;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    line-height: 1.4;
+    top: 90px
+}
+
+.tooltip .keyword {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.tooltip .value {
+    color: #007bff;
+    font-weight: normal;
+}
+
+.tooltip .default-value {
+    color: #007bff;
+    font-weight: normal;
+}
+
+.tooltip .normal-text {
+    color: white;
+    font-weight: normal;
+}
+
+button:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
 .footer {
     bottom: 0;
 }

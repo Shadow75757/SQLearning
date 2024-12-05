@@ -33,7 +33,7 @@ $inventory = $pdo->query("SELECT * FROM inventory")->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MYSQLearning | Home</title>
+    <title>SQLearning | Home</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/076868c758.js" crossorigin="anonymous"></script>
