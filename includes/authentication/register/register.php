@@ -58,13 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
         <form method="POST" action="register.php" autocomplete="off">
             <div class="textbox">
-                <input type="text" id="username" name="username" placeholder="Enter username" required title="Enter a unique username (e.g., john_doe)">
+                <input type="text" id="username" name="username" placeholder="Enter username" title="Enter a unique username (e.g., john_doe)">
             </div>
             <div class="textbox">
-                <input type="password" id="password" name="password" placeholder="Enter password" required title="Password should be at least 8 characters, with one uppercase letter and one number or symbol.">
+                <input type="password" id="password" name="password" placeholder="Enter password" title="Password should be at least 8 characters, with one uppercase letter and one number or symbol.">
             </div>
             <div class="textbox">
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required title="Re-enter your password to confirm it matches.">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" title="Re-enter your password to confirm it matches.">
             </div>
 
             <button class="btn" type="submit">Register<span class="tooltip"></span></button>
@@ -77,5 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 <?php require_once('../../../includes/footer/footer.php'); ?>
+<style>
+    .footer {
+        position: absolute !important;
+    }
+</style>
 
 </html>

@@ -43,12 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="login-form">
         <h2>Login</h2>
-        <?php if (isset($error)): ?>
-            <p class="error"><?= htmlspecialchars($error) ?></p>
+        <?php if (!empty($error)): ?>
+            <div class="message-box error"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
+
         <form action="login.php" method="post" autocomplete="off">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
             <button id="login-button" type="submit">Login<span class="tooltip"></span></button>
             <a class="register" href="../register/register.php">Don't have an account?<br><a class="footer__link" style="text-align: center; font-size: 1rem" href="../register/register.php">Register now!</a></a>
         </form>
@@ -56,5 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 <script src="tooltip.js"></script>
 <?php require_once('../../../includes/footer/footer.php'); ?>
+<style>
+    .footer {
+        position: absolute !important;
+    }
+</style>
 
 </html>

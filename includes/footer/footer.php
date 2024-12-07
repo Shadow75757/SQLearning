@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="footer__links">
-            <a href="about.html" class="footer__link">About Me</a>
-            <a href="work.html" class="footer__link">Portfolio</a>
-            <a href="contact.html" class="footer__link">Contact Me</a>
+            <a href="about.html" class="footer__link">About Us</a>
+            <a href="work.html" class="footer__link">Project</a>
+            <a href="contact.html" class="footer__link">Contacts</a>
         </div>
         <div class="footer__social">
             <a href="NotFound/oops.html" target="_blank" class="footer__social-link">

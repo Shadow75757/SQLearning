@@ -60,6 +60,7 @@ footer {
     background-color: #1a1a1a;
     border-radius: 28px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 75px;
 }
 
 .left-side {
@@ -142,6 +143,7 @@ form button {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    color: black;
 }
 
 .right-side button {
